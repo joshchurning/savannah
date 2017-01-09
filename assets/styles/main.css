@@ -1,0 +1,19 @@
+.portfolio-thumbnail {
+	width: 100%;
+}
+
+.panel-thumbnail {
+	padding: 10px;
+}
+
+.grow { 
+	transition: all .2s ease-in-out; 
+}
+
+.grow:hover { 
+	transform: scale(1.1); 
+}
+
+.portfolio-columns {
+	padding: 1px;
+}

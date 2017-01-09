@@ -1,0 +1,9 @@
+<div class="modal-header">
+		<h4 class="modal-title">Contact Me!</h3>
+	</div> 
+	<div class="modal-body">
+		<formly-form model="data" fields="fields" form="form">
+			<button class="btn btn-primary"  ng-disabled="form.$invalid" ng-click="sendContactEmail()">Submit</button>
+			<button class="btn btn-danger" ng-click="close()">Cancel</button>
+		</formly-form>
+	</div>  
