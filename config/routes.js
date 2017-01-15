@@ -40,6 +40,10 @@ module.exports.routes = {
        view: 'makeChanges'
   },
 
+'get /download': {
+       view: 'download'
+  },
+
 
   'get /login': {
        view: 'user/login'

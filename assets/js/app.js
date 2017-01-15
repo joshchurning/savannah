@@ -11,6 +11,15 @@ angular.module('app', ['ui.bootstrap', 'formly', 'formlyBootstrap'])
 	});
   }
 
+  $scope.download = function(_filename) {
+  	var payload = {
+  		filename: _filename
+  	}
+  	io.socket.post('/file/download', payload, function (error) {
+	  	
+	  });
+  }
+
 }])
 .controller('contactEmailController', ['$scope', '$uibModalInstance' , function($scope, $uibModalInstance) {
 	$scope.isError = false;

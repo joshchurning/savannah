@@ -34,6 +34,10 @@ module.exports.policies = {
   'makeChangesController': {
     '*': 'isAuthenticated'
   },
+  'FileController': {
+    'index': 'isAuthenticated',
+    'upload': 'isAuthenticated'
+  }
 
   /***************************************************************************
   *                                                                          *
