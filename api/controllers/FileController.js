@@ -21,13 +21,16 @@ module.exports = {
 	        return res.serverError(err);
 
 	      var filenames = [];
-	      for (var i=0; i<files.size(); i++) {
-	      	var filePath = files[i].fd;
-	      	var index = filePath.indexOf("uploads/");
-	      	index = index + 8;
-	      	filenames.push(filePath.substr(index))
-	      }
-	      return res.json({
+	      console.log()
+	      if (files.length > 0) {
+		      for (var i=0; i<files.length; i++) {
+		      	var filePath = files[i].fd;
+		      	var index = filePath.indexOf("uploads/");
+		      	index = index + 8;
+		      	filenames.push(filePath.substr(index))
+		      }
+		  }
+	      return res.view('uploaded',{
 	        message: files.length + ' file(s) uploaded successfully!',
 	        filenames: filenames
 	      });
