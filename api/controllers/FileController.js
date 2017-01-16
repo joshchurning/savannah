@@ -17,14 +17,21 @@ module.exports = {
     req.file('avatar').upload({
     	dirname: '../../assets/uploads'}, 
     	function (err, files) {
-      if (err)
-        return res.serverError(err);
+	      if (err)
+	        return res.serverError(err);
 
-      return res.json({
-        message: files.length + ' file(s) uploaded successfully!',
-        files: files
-      });
-    });
+	      var filenames = [];
+	      for (var i=0; i<files.size(); i++) {
+	      	var filePath = files[i].fd;
+	      	var index = filePath.indexOf("uploads/");
+	      	index = index + 8;
+	      	filenames.push(filePath.substr(index))
+	      }
+	      return res.json({
+	        message: files.length + ' file(s) uploaded successfully!',
+	        filenames: filenames
+	      });
+	    });
   },
 
   download: function (req, res) {

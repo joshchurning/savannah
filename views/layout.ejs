@@ -48,13 +48,16 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
-      <ul class="nav navbar-nav">
-        <li ng-controller="main"><a href="#" ng-click="openContactModal()">Contact</a></li>
-        <li><a href="login">Admin Login</a></li>
-         <li><a href="signup">Sign Up</a></li>
-         <li><a href="download">Download Files</a></li>
-        <!-- <li><a href="makeChanges">Make Changes</a></li> -->
-        <li><a href="post">Auth Check</a></li>
+      <ul class="nav navbar-nav" ng-controller="main">
+        <li><a href="#" ng-click="openContactModal()">Contact</a></li>
+        <li><a href="#" ng-click="openLoginModal()">Admin Login</a></li>
+        <li><a href="#" ng-click="openSignupModal()">Sign Up</a></li>
+        <li><a href="#" ng-click="opeFileDownloadModal()">Download Files</a></li>
+        <% if(req.user){%>
+        <li><a href="#" ng-click="opeFileUploadModal()">File Upload</a></li>
+        <li><a href="logout">Logout</a></li>
+        <%}%>
+        <!-- <li><a href="post">Auth Check</a></li> -->
       </ul>
    </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -113,16 +116,75 @@
 
     -->
     <script type="text/ng-template" id="modalTemplate.html">
-  <div class="modal-header">
-    <h4 class="modal-title">Contact Me!</h3>
-  </div> 
-  <div class="modal-body">
-    <formly-form model="data" fields="fields" form="form">
-      <button class="btn btn-primary"  ng-disabled="form.$invalid" ng-click="sendContactEmail()">Submit</button>
-      <button class="btn btn-danger" ng-click="close()">Cancel</button>
-    </formly-form>
-  </div>  
-</script>
+      <div class="modal-header">
+        <h4 class="modal-title">Contact Me!</h3>
+      </div> 
+      <div class="modal-body">
+        <formly-form model="data" fields="fields" form="form">
+          <button class="btn btn-primary"  ng-disabled="form.$invalid" ng-click="sendContactEmail()">Submit</button>
+          <button class="btn btn-danger" ng-click="close()">Cancel</button>
+        </formly-form>
+      </div>  
+    </script>
+    
+    <script type="text/ng-template" id="login.html">
+      <div class="modal-header">
+        <h4 class="modal-title">Login</h3>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="/login">
+          <input type="text" name="email">
+          <input type="password" name="password">
+          <input type="submit" value="submit">
+        </form> <br>
+        <button class="btn btn-danger" ng-click="close()">Cancel</button>
+      </div>
+    </script>
+
+    <script type="text/ng-template" id="signup.html">
+      <div class="modal-header">
+        <h4 class="modal-title">Sign Up</h3>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="/user">
+          <input type="text" name="email">
+          <input type="password" name="password">
+          <input type="submit" value="submit">
+        </form>
+        <button class="btn btn-danger" ng-click="close()">Cancel</button>
+      </div>
+    </script>
+
+    <script type="text/ng-template" id="file-upload.html">
+      <div class="modal-body">
+        <form action="file/upload" enctype="multipart/form-data" method="post">
+          <input type="file" name="avatar" multiple="multiple"><br>
+          <input type="submit" value="Upload">
+        </form>
+        <button class="btn btn-danger" ng-click="close()">Cancel</button>
+      </div>
+    </script>
+
+    <script type="text/ng-template" id="file-download.html">
+      <div class="modal-body">
+        <input type="text" ng-model="downloadName">
+        <button ng-click="showDownload = true">Submit</button>
+        <br><br>
+        <a ng-show="showDownload" ng-href="uploads/{{downloadName}}"><h3>Download Link</h3></a>
+        <button class="btn btn-danger" ng-click="close()">Cancel</button>
+      </div>
+    </script>
+    <!-- <script type="text/ng-template" id="login.html">
+      <div class="modal-header">
+        <h4 class="modal-title">Contact Me!</h3>
+      </div> 
+      <div class="modal-body">
+        <formly-form model="data" fields="fields" form="form">
+          <button class="btn btn-primary"  ng-disabled="form.$invalid" ng-click="sendContactEmail()">Submit</button>
+          <button class="btn btn-danger" ng-click="close()">Cancel</button>
+        </formly-form>
+      </div>  
+    </script> -->
 
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>

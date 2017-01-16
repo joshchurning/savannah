@@ -2,9 +2,49 @@ angular.module('app', ['ui.bootstrap', 'formly', 'formlyBootstrap'])
 .controller('main', ['$scope', '$uibModal' , function($scope, $uibModal) {
   $scope.text = "Hello, Savannah";
 
+  $scope.close = function() {
+			$uibModalInstance.dismiss('dismiss');
+	  }
+
   $scope.openContactModal = function() {
   	var modalInstance = $uibModal.open({
 		templateUrl: 'modalTemplate.html',
+		controller: 'contactEmailController',
+		size: 'lg',
+		resolve: { }
+	});
+  }
+
+  $scope.openLoginModal = function() {
+  	var modalInstance = $uibModal.open({
+		templateUrl: 'login.html',
+		controller: 'contactEmailController',
+		size: 'lg',
+		resolve: { }
+	});
+  }
+
+  $scope.openSignupModal = function() {
+  	var modalInstance = $uibModal.open({
+		templateUrl: 'signup.html',
+		controller: 'contactEmailController',
+		size: 'lg',
+		resolve: { }
+	});
+  }
+
+  $scope.opeFileUploadModal = function() {
+  	var modalInstance = $uibModal.open({
+		templateUrl: 'file-upload.html',
+		controller: 'contactEmailController',
+		size: 'lg',
+		resolve: { }
+	});
+  }
+
+  $scope.opeFileDownloadModal = function() {
+  	var modalInstance = $uibModal.open({
+		templateUrl: 'file-download.html',
 		controller: 'contactEmailController',
 		size: 'lg',
 		resolve: { }
